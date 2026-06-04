@@ -110,13 +110,20 @@ export default function HomePage() {
           />
           <div className="max-w-5xl mx-auto relative">
             <div className="flex items-start gap-8 mb-8">
-              <Image
-                src="/images/logo.png"
-                alt="Project Ember"
-                width={140}
-                height={140}
-                className="opacity-95 flex-shrink-0 mt-1"
-              />
+              <div className="relative flex-shrink-0 mt-1">
+                {/* Logo glow effect */}
+                <div 
+                  className="absolute inset-0 blur-2xl opacity-60 scale-150"
+                  style={{ background: 'radial-gradient(circle, rgba(192, 98, 54, 0.5) 0%, transparent 70%)' }}
+                />
+                <Image
+                  src="/images/logo.png"
+                  alt="Project Ember"
+                  width={140}
+                  height={140}
+                  className="relative opacity-95"
+                />
+              </div>
               <div>
                 <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-foreground leading-tight tracking-tight mb-6">
                   Building an autonomous AI organisation.
