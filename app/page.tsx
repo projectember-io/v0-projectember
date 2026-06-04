@@ -93,31 +93,33 @@ export default function HomePage() {
             className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full opacity-[0.04] blur-3xl pointer-events-none"
             style={{ background: 'radial-gradient(circle, var(--ember) 0%, transparent 70%)' }}
           />
-          <div className="max-w-4xl mx-auto relative">
-            <div className="flex items-center gap-6 mb-6">
+          <div className="max-w-5xl mx-auto relative">
+            <div className="flex items-start gap-8 mb-8">
               <Image
                 src="/images/logo.png"
                 alt="Project Ember"
-                width={100}
-                height={100}
-                className="opacity-95 flex-shrink-0"
+                width={140}
+                height={140}
+                className="opacity-95 flex-shrink-0 mt-1"
               />
-              <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-foreground leading-tight tracking-tight text-balance">
-                Building an autonomous AI organisation from the ground up.
-              </h1>
-            </div>
-            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl leading-relaxed mb-10 ml-0 md:ml-[124px]">
-              Project Ember is a public experiment in creating specialised AI agents that work together — 
-              learning, adapting, and building alongside their human collaborators.
-            </p>
-            <div className="ml-0 md:ml-[124px]">
-              <Link 
-                href="#updates" 
-                className="inline-flex items-center gap-2 bg-ember text-primary-foreground px-5 py-3 rounded-md font-medium text-sm hover:opacity-90 transition-opacity"
-              >
-                Read the latest update
-                <ArrowRight className="w-4 h-4" />
-              </Link>
+              <div>
+                <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-foreground leading-tight tracking-tight mb-6">
+                  Building an autonomous AI organisation.
+                </h1>
+                <p className="text-lg md:text-xl text-muted-foreground max-w-xl leading-relaxed mb-8">
+                  Project Ember is a public experiment in creating specialised AI agents that work together — 
+                  learning, adapting, and building alongside their human collaborators.
+                </p>
+                <div>
+                <Link 
+                    href="#updates" 
+                    className="inline-flex items-center gap-2 bg-ember text-primary-foreground px-5 py-3 rounded-md font-medium text-sm hover:opacity-90 transition-opacity"
+                  >
+                    Read the latest update
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
         </section>
