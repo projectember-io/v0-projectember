@@ -80,18 +80,33 @@ export default function HomePage() {
       <main>
         {/* Hero Section */}
         <section className="pt-32 pb-24 px-6 relative overflow-hidden">
-          {/* Subtle grid pattern */}
+          {/* Noise texture overlay */}
           <div 
-            className="absolute inset-0 opacity-[0.03]"
+            className="absolute inset-0 opacity-[0.4] pointer-events-none mix-blend-soft-light"
             style={{
-              backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-              backgroundSize: '60px 60px',
+              backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
             }}
           />
-          {/* Ember glow */}
+          {/* Primary ember glow - larger and more prominent */}
           <div 
-            className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full opacity-[0.04] blur-3xl pointer-events-none"
-            style={{ background: 'radial-gradient(circle, var(--ember) 0%, transparent 70%)' }}
+            className="absolute -top-32 left-1/3 w-[800px] h-[800px] rounded-full pointer-events-none"
+            style={{ 
+              background: 'radial-gradient(circle, rgba(192, 98, 54, 0.12) 0%, rgba(192, 98, 54, 0.04) 40%, transparent 70%)',
+            }}
+          />
+          {/* Secondary subtle glow on right */}
+          <div 
+            className="absolute top-1/4 -right-32 w-[500px] h-[500px] rounded-full pointer-events-none"
+            style={{ 
+              background: 'radial-gradient(circle, rgba(192, 98, 54, 0.06) 0%, transparent 60%)',
+            }}
+          />
+          {/* Subtle vignette effect */}
+          <div 
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background: 'radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.4) 100%)',
+            }}
           />
           <div className="max-w-5xl mx-auto relative">
             <div className="flex items-start gap-8 mb-8">
