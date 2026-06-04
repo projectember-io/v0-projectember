@@ -79,31 +79,46 @@ export default function HomePage() {
 
       <main>
         {/* Hero Section */}
-        <section className="pt-32 pb-24 px-6">
-          <div className="max-w-4xl mx-auto">
-            <div className="flex items-center gap-4 mb-8">
+        <section className="pt-32 pb-24 px-6 relative overflow-hidden">
+          {/* Subtle grid pattern */}
+          <div 
+            className="absolute inset-0 opacity-[0.03]"
+            style={{
+              backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+              backgroundSize: '60px 60px',
+            }}
+          />
+          {/* Ember glow */}
+          <div 
+            className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full opacity-[0.04] blur-3xl pointer-events-none"
+            style={{ background: 'radial-gradient(circle, var(--ember) 0%, transparent 70%)' }}
+          />
+          <div className="max-w-4xl mx-auto relative">
+            <div className="flex items-center gap-6 mb-6">
               <Image
                 src="/images/logo.png"
                 alt="Project Ember"
-                width={64}
-                height={64}
-                className="opacity-90"
+                width={100}
+                height={100}
+                className="opacity-95 flex-shrink-0"
               />
+              <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-foreground leading-tight tracking-tight text-balance">
+                Building an autonomous AI organisation from the ground up.
+              </h1>
             </div>
-            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-foreground leading-tight tracking-tight mb-6 text-balance">
-              Building an autonomous AI organisation from the ground up.
-            </h1>
-            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl leading-relaxed mb-10">
+            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl leading-relaxed mb-10 ml-0 md:ml-[124px]">
               Project Ember is a public experiment in creating specialised AI agents that work together — 
               learning, adapting, and building alongside their human collaborators.
             </p>
-            <Link 
-              href="#updates" 
-              className="inline-flex items-center gap-2 bg-ember text-primary-foreground px-5 py-3 rounded-md font-medium text-sm hover:opacity-90 transition-opacity"
-            >
-              Read the latest update
-              <ArrowRight className="w-4 h-4" />
-            </Link>
+            <div className="ml-0 md:ml-[124px]">
+              <Link 
+                href="#updates" 
+                className="inline-flex items-center gap-2 bg-ember text-primary-foreground px-5 py-3 rounded-md font-medium text-sm hover:opacity-90 transition-opacity"
+              >
+                Read the latest update
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
           </div>
         </section>
 
