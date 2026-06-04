@@ -147,8 +147,13 @@ export default function HomePage() {
         </section>
 
         {/* Latest Update - Featured */}
-        <section id="updates" className="py-16 px-6 border-t border-border">
-          <div className="max-w-4xl mx-auto">
+        <section id="updates" className="py-16 px-6 border-t border-border relative overflow-hidden">
+          {/* Subtle ember glow */}
+          <div 
+            className="absolute -bottom-64 -left-32 w-[500px] h-[500px] rounded-full pointer-events-none"
+            style={{ background: 'radial-gradient(circle, rgba(192, 98, 54, 0.06) 0%, transparent 60%)' }}
+          />
+          <div className="max-w-4xl mx-auto relative">
             <span className="text-ember text-sm font-medium tracking-wide uppercase mb-8 block">Latest Update</span>
             
             {updates.filter(u => u.featured).map((update) => (
@@ -207,8 +212,13 @@ export default function HomePage() {
         </section>
 
         {/* About Section */}
-        <section id="about" className="py-24 px-6 border-t border-border">
-          <div className="max-w-4xl mx-auto">
+        <section id="about" className="py-24 px-6 border-t border-border relative overflow-hidden">
+          {/* Subtle ember glow */}
+          <div 
+            className="absolute top-1/2 -right-64 w-[600px] h-[600px] rounded-full pointer-events-none"
+            style={{ background: 'radial-gradient(circle, rgba(192, 98, 54, 0.05) 0%, transparent 60%)' }}
+          />
+          <div className="max-w-4xl mx-auto relative">
             <span className="text-ember text-sm font-medium tracking-wide uppercase mb-8 block">About</span>
             
             <div className="grid md:grid-cols-2 gap-12">
@@ -255,8 +265,13 @@ export default function HomePage() {
         </section>
 
         {/* Roadmap Section */}
-        <section id="roadmap" className="py-24 px-6 border-t border-border">
-          <div className="max-w-4xl mx-auto">
+        <section id="roadmap" className="py-24 px-6 border-t border-border relative overflow-hidden">
+          {/* Subtle ember glow */}
+          <div 
+            className="absolute -bottom-32 left-1/4 w-[500px] h-[500px] rounded-full pointer-events-none"
+            style={{ background: 'radial-gradient(circle, rgba(192, 98, 54, 0.05) 0%, transparent 60%)' }}
+          />
+          <div className="max-w-4xl mx-auto relative">
             <span className="text-ember text-sm font-medium tracking-wide uppercase mb-8 block">Roadmap</span>
             
             <div className="grid md:grid-cols-3 gap-6">
