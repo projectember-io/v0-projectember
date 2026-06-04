@@ -5,7 +5,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-heading: var(--font-serif);
+  --font-heading: var(--font-sans);
   --font-sans: 'Inter', 'Inter Fallback', system-ui, sans-serif;
   --font-serif: 'Source Serif 4', 'Georgia', serif;
   --font-mono: 'Geist Mono', 'Geist Mono Fallback', monospace;
@@ -66,7 +66,7 @@ html {
   --secondary: #1f1f1f;
   --secondary-foreground: #e5e5e5;
   --muted: #262626;
-  --muted-foreground: #737373;
+  --muted-foreground: #a8a8a8;
   --accent: #1f1f1f;
   --accent-foreground: #f0f0f0;
   --destructive: #dc2626;
@@ -97,9 +97,272 @@ html {
   }
   body {
     @apply bg-background text-foreground;
+    min-height: 100vh;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
   html {
     @apply font-sans;
     background-color: #0a0a0a;
+  }
+}
+
+@layer components {
+  .ember-shell {
+    isolation: isolate;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  .ember-shell::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+    background:
+      linear-gradient(135deg, rgba(192, 98, 54, 0.12), transparent 28%),
+      linear-gradient(180deg, rgba(192, 98, 54, 0.08), transparent 42%),
+      repeating-linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.035) 0,
+        rgba(255, 255, 255, 0.035) 1px,
+        transparent 1px,
+        transparent 76px
+      ),
+      repeating-linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.028) 0,
+        rgba(255, 255, 255, 0.028) 1px,
+        transparent 1px,
+        transparent 76px
+      ),
+      linear-gradient(180deg, #120d0b 0%, #0a0a0a 42%, #090909 100%);
+  }
+
+  .ember-shell::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.58;
+    background:
+      repeating-linear-gradient(
+        115deg,
+        transparent 0,
+        transparent 18px,
+        rgba(192, 98, 54, 0.045) 18px,
+        rgba(192, 98, 54, 0.045) 19px,
+        transparent 19px,
+        transparent 56px
+      ),
+      linear-gradient(90deg, rgba(192, 98, 54, 0.14), transparent 34%, transparent 70%, rgba(255, 255, 255, 0.025));
+    mask-image: linear-gradient(180deg, black 0%, black 52%, transparent 92%);
+  }
+
+  .status-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 999px;
+    background: var(--ember);
+    box-shadow: 0 0 0 rgba(192, 98, 54, 0.5);
+    animation: status-pulse 2.4s ease-out infinite;
+  }
+
+  .update-panel {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .update-panel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.045), transparent 36%),
+      repeating-linear-gradient(
+        0deg,
+        transparent 0,
+        transparent 10px,
+        rgba(255, 255, 255, 0.025) 10px,
+        rgba(255, 255, 255, 0.025) 11px
+      );
+    opacity: 0.7;
+  }
+
+  .update-panel > * {
+    position: relative;
+  }
+
+  .update-line {
+    height: 2px;
+    overflow: hidden;
+    border-radius: 999px;
+    background:
+      repeating-linear-gradient(
+        90deg,
+        rgba(192, 98, 54, 0.12) 0,
+        rgba(192, 98, 54, 0.12) 42px,
+        rgba(192, 98, 54, 0.85) 96px,
+        rgba(240, 240, 240, 0.46) 132px,
+        rgba(192, 98, 54, 0.18) 190px,
+        rgba(192, 98, 54, 0.12) 264px
+      ),
+      rgba(255, 255, 255, 0.05);
+    background-size: 264px 100%, 100% 100%;
+    animation: update-scan 5.5s linear infinite;
+  }
+
+  .ember-footer {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ember-footer::before {
+    content: "";
+    position: absolute;
+    inset: auto 0 0;
+    height: 8rem;
+    pointer-events: none;
+    background: linear-gradient(180deg, transparent, rgba(192, 98, 54, 0.08));
+  }
+
+  .ember-rise {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .ember-rise span {
+    position: absolute;
+    bottom: -1rem;
+    width: 0.42rem;
+    height: 0.42rem;
+    border-radius: 999px;
+    background: rgba(192, 98, 54, 0.95);
+    box-shadow:
+      0 0 12px rgba(192, 98, 54, 0.58),
+      0 0 28px rgba(192, 98, 54, 0.22);
+    opacity: 0;
+    animation: ember-float 7.5s ease-in infinite;
+  }
+
+  .ember-rise span:nth-child(1) {
+    left: 10%;
+    animation-delay: -0.8s;
+    animation-duration: 6.8s;
+  }
+
+  .ember-rise span:nth-child(2) {
+    left: 21%;
+    width: 0.3rem;
+    height: 0.3rem;
+    animation-delay: -2.4s;
+    animation-duration: 7.6s;
+  }
+
+  .ember-rise span:nth-child(3) {
+    left: 32%;
+    animation-delay: -4.1s;
+    animation-duration: 8.2s;
+  }
+
+  .ember-rise span:nth-child(4) {
+    left: 44%;
+    width: 0.34rem;
+    height: 0.34rem;
+    animation-delay: -5.7s;
+    animation-duration: 7.1s;
+  }
+
+  .ember-rise span:nth-child(5) {
+    left: 56%;
+    animation-delay: -1.6s;
+    animation-duration: 8.9s;
+  }
+
+  .ember-rise span:nth-child(6) {
+    left: 67%;
+    width: 0.28rem;
+    height: 0.28rem;
+    animation-delay: -3.2s;
+    animation-duration: 7.4s;
+  }
+
+  .ember-rise span:nth-child(7) {
+    left: 78%;
+    width: 0.38rem;
+    height: 0.38rem;
+    animation-delay: -6.9s;
+    animation-duration: 8.6s;
+  }
+
+  .ember-rise span:nth-child(8) {
+    left: 90%;
+    width: 0.24rem;
+    height: 0.24rem;
+    animation-delay: -4.9s;
+    animation-duration: 6.9s;
+  }
+
+  .ember-rise span:nth-child(9) {
+    left: 39%;
+    width: 0.22rem;
+    height: 0.22rem;
+    animation-delay: -7.8s;
+    animation-duration: 9.2s;
+  }
+
+  .ember-rise span:nth-child(10) {
+    left: 71%;
+    width: 0.46rem;
+    height: 0.46rem;
+    animation-delay: -0.2s;
+    animation-duration: 8s;
+  }
+}
+
+@keyframes status-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(192, 98, 54, 0.5);
+  }
+  72%, 100% {
+    box-shadow: 0 0 0 9px rgba(192, 98, 54, 0);
+  }
+}
+
+@keyframes update-scan {
+  0% {
+    background-position: 0 0, 0 0;
+  }
+  100% {
+    background-position: 264px 0, 0 0;
+  }
+}
+
+@keyframes ember-float {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) scale(0.72);
+  }
+  18% {
+    opacity: 0.75;
+  }
+  72% {
+    opacity: 0.45;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(1.4rem, -7rem, 0) scale(0.28);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .status-dot,
+  .update-line,
+  .ember-rise span {
+    animation: none;
   }
 }
