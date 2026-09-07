@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="950" viewBox="0 0 560 950" role="img" aria-labelledby="title desc">
+<title id="title">Podcast link discovery and repeat-run checks</title>
+<desc id="desc">Try YouTube RSS up to three times. On failure, use the channel page. Normalise discovery and resolve platform destinations. Compare six expected slugs with Shlink. Create only missing links, or do nothing when all exist. Email is separately gated.</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0L6 3L0 6" fill="none" stroke="#e49a73" stroke-width="1.5"/></marker></defs>
+<rect width="560" height="950" rx="18" fill="#141414"/>
+<g font-family="Arial, sans-serif" text-anchor="middle">
+<text x="280" y="43" font-size="22" fill="#e49a73">DISCOVER → PLAN → ACT</text>
+<g fill="#262626" stroke="#666"><rect x="52" y="66" width="456" height="84" rx="10"/><rect x="110" y="200" width="398" height="84" rx="10"/><rect x="52" y="336" width="456" height="84" rx="10"/><rect x="52" y="472" width="456" height="98" rx="10"/><rect x="32" y="636" width="230" height="98" rx="10"/><rect x="288" y="636" width="240" height="98" rx="10"/><rect x="32" y="800" width="230" height="110" rx="10"/></g>
+<g fill="#f0f0f0" font-size="24" font-weight="700"><text x="280" y="100">YouTube RSS</text><text x="309" y="235">Channel-page fallback</text><text x="280" y="369">Normalise discovery</text><text x="280" y="507">Compare exact slugs</text><text x="147" y="674">Create missing</text><text x="408" y="674">No new writes</text><text x="147" y="835">Email switch</text></g>
+<g fill="#cccccc" font-size="21"><text x="280" y="132">At most 3 tries, 5-second waits</text><text x="309" y="267">Only after RSS failure</text><text x="280" y="402">Resolve platform destinations</text><text x="280" y="540">6 expected links vs Shlink records</text><text x="147" y="707">Some links absent</text><text x="408" y="707">All links exist</text><text x="147" y="866">Send only when</text><text x="147" y="893">enabled</text></g>
+<g fill="none" stroke="#e49a73" stroke-width="2" marker-end="url(#arrow)"><path d="M310 150V200"/><path d="M110 150H74V312H210V336"/><path d="M310 284V336"/><path d="M280 420V472"/><path d="M220 570V607H147V636"/><path d="M340 570V607H408V636"/><path d="M147 734V800"/></g>
+<g fill="#e49a73" font-size="19"><text x="367" y="182">failure</text><text x="155" y="303">RSS success</text></g>
+<text x="391" y="820" font-size="20" fill="#aaaaaa">Alerts also pass</text><text x="391" y="849" font-size="20" fill="#aaaaaa">through the switch.</text>
+<text x="280" y="936" font-size="17" fill="#aaaaaa">Simplified flow; both discovery routes use one planner.</text>
+</g></svg>

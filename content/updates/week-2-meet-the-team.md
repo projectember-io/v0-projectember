@@ -1,70 +1,71 @@
 ---
-title: "Meet the Team"
+title: "Meet the team building my homelab automation"
 week: 2
 date: "2026-06-12"
-summary: "Meet the IT operations and personal agents behind Project Ember, the responsibilities I've given them, and the inspiration that started it."
+summary: "Why I split homelab maintenance and personal admin between specialist agents, what each one owns, and how I want their handoffs to work."
 ---
 
 *Updated 8 September 2026 to reflect the team's evolving roles.*
 
-Here are the agents behind Project Ember and the responsibilities I've given them inside LibraHQ.
+My homelab supports the things I do every day: editing work, media storage, self-hosted services, and the household network. Keeping it running means dealing with jobs that rarely stay inside one tidy category.
 
-I've split the team into two groups. IT Operations looks after the systems that keep everything running. The personal team focuses on the admin that competes for my attention each day.
+A service can look broken when its storage has disappeared. A storage problem can look like a network problem. Before changing anything, someone has to work out which system is actually responsible.
 
-## Where the idea came from
+I already used AI to help troubleshoot. The next question was whether I could give agents ongoing responsibilities and enough shared context to pick up work without starting every conversation from scratch.
 
-One of my inspirations was Väinämöinen, Pulsed Media's AI support and systems administration agent. [Pulsed Media's account of building Väinämöinen](https://pulsedmedia.com/blog/2026/02/vainamoinen-autonomous-ai-sysadmin-transformed-support-costs-with-91-autonomy/) describes an agent handling support tickets and infrastructure work within defined responsibilities and permissions.
+That's the idea behind the team inside LibraHQ. Project Ember is where I document how it develops.
 
-That gave me a practical example of what I wanted to explore. I already used AI to help troubleshoot things. What would happen if I gave agents ongoing responsibilities, the context to understand those responsibilities, and a way to hand work to each other?
+## The idea that got me thinking
 
-## IT Operations
+Väinämöinen, Pulsed Media's AI support and systems administration agent, was one of my inspirations. Their [account of building it](https://pulsedmedia.com/blog/2026/02/vainamoinen-autonomous-ai-sysadmin-transformed-support-costs-with-91-autonomy/) connects a recurring operational burden with an agent given defined responsibilities. It also describes mistakes and the controls introduced afterward.
 
-My technical background made infrastructure a natural starting point. There is always something to maintain, diagnose, document, or check. I've divided that work between four roles.
+That combination matters to this project. I want help with real work, and I need to understand what happens when the agent gets something wrong.
 
-### Integrity: CTO and oversight
+For my setup, I've divided the work into IT Operations and a personal team. The roles are established, but the amount each agent can do varies. General unattended maintenance is still being prepared; the names below aren't a claim that the homelab already runs itself.
 
-Integrity coordinates the IT team. Its job is to understand what needs doing, decide which specialist should handle it, and review the result. That includes checking that the documentation reflects what actually changed.
+## IT Operations: who owns the problem?
 
-I want a clear place for orchestration and oversight, especially when a task crosses more than one area.
+Integrity coordinates three technical specialists. This is the intended division of responsibility:
 
-### Forge: systems engineering
+![IT Operations structure: Integrity coordinates Forge for systems, Vault for storage and knowledge, and Conduit for networking.](/images/it-operations-team.svg)
 
-Forge handles the systems side: servers, containers, services, and the work needed to keep them running. When a service needs investigation or a system change needs implementing, this is the role I turn to.
+| Agent | Responsibility | A question that belongs here |
+| --- | --- | --- |
+| **Integrity** | CTO, orchestration, and review | What needs investigating, who should do it, and what evidence would close the task? |
+| **Forge** | Systems engineering | Is the service running, what do its logs say, and which dependency is failing? |
+| **Vault** | Storage and knowledge management | Is the data available, is the backup usable, and do the records match the system? |
+| **Conduit** | Networking and infrastructure | Can the systems reach each other, and are DNS, routing, and network policy behaving as intended? |
 
-### Vault: storage and knowledge management
+The point of the split is to make ownership clear. Forge shouldn't have to guess whether a storage change is safe. Integrity should be able to ask Vault for the relevant evidence before deciding what happens next.
 
-Vault focuses on storage, backups, and the records that make the environment understandable. A backup needs evidence that it worked. A system needs documentation someone can use later. Both matter when something goes wrong.
+## What a useful handoff would look like
 
-### Conduit: networking and infrastructure
+Consider a media service that opens normally but cannot play a file. This is an illustration of the workflow I want, not a claim that the agents have completed this sequence autonomously.
 
-Conduit handles network questions and the connections between systems. Its area includes connectivity, routing, and diagnosing why two things that should communicate aren't doing so.
+1. **Integrity defines the investigation.** Establish whether the failure is in the application or one of its dependencies. Start with observation.
+2. **Forge checks the service.** The application may be running while its media mount is unavailable. That finding narrows the next question.
+3. **Vault checks the storage side.** Is the share available, and can the expected data be read? Conduit joins if there is evidence of a connectivity problem.
+4. **Integrity reviews the proposed action.** A service restart or disruptive change comes back to me for approval.
+5. **The result is checked where the problem appeared.** A green service status is not enough; the affected media needs to be readable again. The record should say what was verified and what remains unexplained.
 
-These specialists sit under Integrity's oversight. Having a role assigned does not mean an agent has unrestricted permission to change everything in that area. Access and approval boundaries are part of the design.
+That last step is easy to lose. The value of the handoff is having someone carry the problem through to a checked result.
 
-## The personal team
+## The personal team: less admin to reconstruct
 
-The other side of Project Ember is closer to the original problem: reducing the amount of life admin I have to hold in my head.
+Infrastructure is only part of the overhead I want to reduce. The other team focuses on tasks, information, and everyday decisions.
 
-### Ember: executive assistant and HQ operations
+| Agent | Its job | Where the work stands |
+| --- | --- | --- |
+| **Ember** | Executive assistant and HQ operations | Briefings, task tracking, and inbox/calendar context. Ember is the central point for what needs my attention. |
+| **Scout** | Deals and price watching | Still developing. The aim is to compare relevant offers with what I actually buy and normally pay. |
+| **Endeavour** | Finance and growth | Current work centres on finance records and invoice handoffs. Payments and financial commitments remain separate decisions. |
 
-Ember is the central assistant for day-to-day coordination. Its work centres on tasks, briefings, inbox and calendar context, and keeping track of what needs my attention.
+Ember needs to remember an outstanding task. Scout needs price history. Endeavour needs the relevant financial records. Giving them the same pile of information and tools would make those different jobs harder to define.
 
-The aim is to make it easier to pick up the day without first reconstructing everything from messages and notes.
+## What I'm trying to prove
 
-### Scout: deals and price watching
+The next milestone is a verified handoff: a finding becomes a scoped task, the right specialist investigates it, and the result reaches review with enough evidence to make a decision.
 
-Scout's role is to find useful deals and watch prices. The direction here is to connect things I actually buy with price history and current offers, so a discount can be judged against what I normally pay.
+I don't yet have a measured time-saving figure for the team as a whole. That's something the actual workflows need to establish.
 
-This is still an area I'm developing. I want useful shopping information when I'm planning a purchase, without a stream of deal notifications becoming another thing to manage.
-
-### Endeavour: finance and growth
-
-Endeavour focuses on finance and growth, with current work centred on finance records and invoice handoffs. It gives that work a dedicated home instead of mixing it into every conversation with Ember.
-
-The scope is deliberately bounded. Preparing and organising financial information is different from authorising a payment or making a financial commitment.
-
-## Making the team useful
-
-Giving the agents names is the easy part. The work is in deciding what each one owns, what information it needs, when it should ask for approval, and how the next agent knows what has already happened.
-
-That's what I'm trying to build with Project Ember. I'll use this journal to share the workflows as they develop, including where the handoffs work and where I still have to step in.
+If you're building something similar, start with one recurring job. Write down its inputs, the decisions it requires, and what a successful result looks like. The agent's name can come afterward. Its responsibility needs to be clear first.
