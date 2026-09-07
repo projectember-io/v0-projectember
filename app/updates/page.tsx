@@ -1,34 +1,21 @@
-import Image from "next/image"
+import { feedAlternates } from "@/lib/site"
+import { SiteHeader } from "@/components/site-header"
+import { UpdateMeta } from "@/components/update-meta"
 import Link from "next/link"
-import { ArrowLeft, ArrowRight } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 import { SiteFooter } from "@/components/site-footer"
 import { getAllUpdates } from "@/lib/updates"
+
+export const metadata = { title: "Updates", alternates: { ...feedAlternates, canonical: "/updates" } }
 
 export default function UpdatesPage() {
   const updates = getAllUpdates()
 
   return (
     <div className="ember-shell min-h-screen bg-background flex flex-col">
-      <header className="border-b border-border bg-background/80 backdrop-blur-sm">
-        <nav className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-3 group">
-            <Image
-              src="/images/logo.png"
-              alt="Project Ember"
-              width={32}
-              height={32}
-              className="transition-transform group-hover:scale-105"
-            />
-            <span className="text-foreground font-medium">Project Ember</span>
-          </Link>
-          <Link href="/" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
-            <ArrowLeft className="h-4 w-4" />
-            Home
-          </Link>
-        </nav>
-      </header>
+      <SiteHeader />
 
-      <main className="flex-1 px-6 py-20">
+      <main id="main-content" tabIndex={-1} className="flex-1 px-6 py-20">
         <div className="max-w-4xl mx-auto">
           <p className="mb-5 font-mono text-xs uppercase text-ember">Updates</p>
           <h1 className="font-sans text-4xl md:text-5xl text-foreground leading-tight font-semibold">
@@ -36,17 +23,14 @@ export default function UpdatesPage() {
           </h1>
 
           <div className="mt-12 space-y-1">
+            {updates.length === 0 && <p className="text-muted-foreground">No updates published yet.</p>}
             {updates.map((update) => (
               <Link
                 key={update.slug}
                 href={update.href}
                 className="group block border-b border-border py-6 transition-colors hover:border-ember/50"
               >
-                <div className="mb-3 flex items-center gap-3 text-sm text-muted-foreground">
-                  <span className="font-mono text-ember">Week {update.week}</span>
-                  <span className="text-border">·</span>
-                  <time>{update.displayDate}</time>
-                </div>
+                <UpdateMeta update={update} className="mb-3" />
                 <div className="flex items-center justify-between gap-6">
                   <h2 className="font-sans text-2xl text-foreground group-hover:text-ember transition-colors font-semibold">
                     {update.title}

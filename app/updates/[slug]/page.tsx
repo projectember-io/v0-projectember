@@ -1,7 +1,9 @@
-import Image from "next/image"
-import Link from "next/link"
+import { feedAlternates } from "@/lib/site"
+import type { Metadata } from "next"
+import { Markdown } from "@/components/markdown"
+import { SiteHeader } from "@/components/site-header"
+import { UpdateMeta } from "@/components/update-meta"
 import { notFound } from "next/navigation"
-import { ArrowLeft } from "lucide-react"
 import { SiteFooter } from "@/components/site-footer"
 import { getAllUpdates, getUpdateBySlug } from "@/lib/updates"
 
@@ -17,7 +19,7 @@ export function generateStaticParams() {
   }))
 }
 
-export async function generateMetadata({ params }: UpdatePageProps) {
+export async function generateMetadata({ params }: UpdatePageProps): Promise<Metadata> {
   const { slug } = await params
   const update = getUpdateBySlug(slug)
 
@@ -26,35 +28,20 @@ export async function generateMetadata({ params }: UpdatePageProps) {
   }
 
   return {
-    title: `${update.title} | Project Ember`,
+    title: update.title,
     description: update.summary,
+    alternates: { ...feedAlternates, canonical: update.href },
+    openGraph: {
+      title: update.title,
+      description: update.summary,
+      type: "article",
+      url: update.href,
+      publishedTime: `${update.date}T00:00:00.000Z`,
+      authors: ["Jamie Everett"],
+      images: ["/opengraph-image"],
+    },
+    twitter: { card: "summary_large_image" as const, title: update.title, description: update.summary, images: ["/opengraph-image"] },
   }
-}
-
-function renderMarkdown(content: string) {
-  return content.split(/\n{2,}/).map((block, index) => {
-    if (block.startsWith("## ")) {
-      return (
-        <h2 key={block} className={`font-sans text-2xl md:text-3xl text-foreground mb-5 leading-tight font-semibold ${index === 0 ? "mt-0" : "mt-12"}`}>
-          {block.replace(/^## /, "")}
-        </h2>
-      )
-    }
-
-    if (block.startsWith("> ")) {
-      return (
-        <blockquote key={block} className="my-8 border-l-2 border-ember pl-5 text-xl text-foreground">
-          {block.replace(/^> /, "")}
-        </blockquote>
-      )
-    }
-
-    return (
-      <p key={block} className="mb-6 text-muted-foreground leading-relaxed">
-        {block}
-      </p>
-    )
-  })
 }
 
 export default async function UpdatePage({ params }: UpdatePageProps) {
@@ -67,32 +54,11 @@ export default async function UpdatePage({ params }: UpdatePageProps) {
 
   return (
     <div className="ember-shell min-h-screen bg-background flex flex-col">
-      <header className="border-b border-border bg-background/80 backdrop-blur-sm">
-        <nav className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-3 group">
-            <Image
-              src="/images/logo.png"
-              alt="Project Ember"
-              width={32}
-              height={32}
-              className="transition-transform group-hover:scale-105"
-            />
-            <span className="text-foreground font-medium">Project Ember</span>
-          </Link>
-          <Link href="/updates" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
-            <ArrowLeft className="h-4 w-4" />
-            Updates
-          </Link>
-        </nav>
-      </header>
+      <SiteHeader backHref="/updates" backLabel="Updates" />
 
-      <main className="flex-1 px-6 py-20">
+      <main id="main-content" tabIndex={-1} className="flex-1 px-6 py-20">
         <article className="max-w-3xl mx-auto">
-          <div className="mb-8 flex items-center gap-3 text-sm text-muted-foreground">
-            <span className="font-mono text-ember">Week {update.week}</span>
-            <span className="text-border">·</span>
-            <time>{update.displayDate}</time>
-          </div>
+          <UpdateMeta update={update} className="mb-8" />
           <h1 className="font-sans text-4xl md:text-5xl text-foreground leading-tight font-semibold">
             {update.title}
           </h1>
@@ -101,7 +67,7 @@ export default async function UpdatePage({ params }: UpdatePageProps) {
           </p>
 
           <div className="mt-6 border-t border-border pt-6">
-            {renderMarkdown(update.content)}
+            <Markdown>{update.content}</Markdown>
           </div>
 
           <footer className="mt-14 border-t border-border pt-8">

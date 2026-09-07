@@ -1,35 +1,43 @@
 {
-  "name": "my-project",
+  "name": "project-ember",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --hostname 127.0.0.1",
     "build": "next build",
-    "start": "next start",
-    "lint": "eslint ."
+    "start": "next start --hostname 127.0.0.1",
+    "lint": "eslint .",
+    "typecheck": "next typegen && tsc --noEmit",
+    "test": "node --import tsx --test tests/*.test.ts tests/*.test.tsx",
+    "test:e2e": "playwright test",
+    "check": "pnpm lint && pnpm typecheck && pnpm test && pnpm build"
   },
   "dependencies": {
-    "@base-ui/react": "^1.5.0",
-    "@fontsource-variable/inter": "^5.2.8",
-    "@fontsource-variable/source-serif-4": "^5.2.9",
-    "@vercel/analytics": "1.6.1",
-    "class-variance-authority": "^0.7.1",
-    "clsx": "^2.1.1",
-    "lucide-react": "^1.16.0",
-    "next": "16.2.6",
-    "react": "^19",
-    "react-dom": "^19",
-    "shadcn": "^4.8.0",
-    "tailwind-merge": "^3.3.1",
-    "tw-animate-css": "^1.4.0"
+    "@fontsource-variable/inter": "^5.3.0",
+    "@vercel/analytics": "2.0.1",
+    "lucide-react": "^1.41.0",
+    "next": "16.3.4",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1",
+    "yaml": "^2.9.0"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4.2.0",
+    "@playwright/test": "^1.63.0",
+    "@tailwindcss/postcss": "^4.3.3",
     "@types/node": "^24",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "postcss": "^8.5",
-    "tailwindcss": "^4.2.0",
-    "typescript": "5.7.3"
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.7",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "16.3.4",
+    "postcss": "^8.5.28",
+    "tailwindcss": "^4.3.3",
+    "tsx": "^4.23.13",
+    "typescript": "~5.9.3"
+  },
+  "packageManager": "pnpm@10.34.5",
+  "engines": {
+    "node": ">=24.18.0 <25"
   }
 }

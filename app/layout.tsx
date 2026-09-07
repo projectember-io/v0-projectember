@@ -1,13 +1,15 @@
+import { feedAlternates, getSiteUrl, site } from "@/lib/site"
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata } from 'next'
 import '@fontsource-variable/inter'
-import '@fontsource-variable/source-serif-4'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Project Ember',
+  metadataBase: getSiteUrl(),
+  title: { default: site.name, template: `%s | ${site.name}` },
   description: 'Building an autonomous AI organisation from the ground up. A public project documenting the creation of specialised AI agents working together.',
-  generator: 'v0.app',
+  alternates: feedAlternates,
+  twitter: { card: "summary_large_image", images: ["/opengraph-image"] },
   icons: {
     icon: '/images/logo.png',
     apple: '/images/logo.png',

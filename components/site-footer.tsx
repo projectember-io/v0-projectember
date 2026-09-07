@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
-import { ExternalLink, Mail } from "lucide-react"
+import { ExternalLink, Rss } from "lucide-react"
 
 export function SiteFooter() {
   return (
@@ -30,8 +30,9 @@ export function SiteFooter() {
         </div>
         <div className="flex items-center gap-6">
           <Link
-            href="https://github.com"
+            href="https://github.com/jamieeverett-io/v0-project-ember"
             target="_blank"
+            rel="noopener noreferrer"
             className="text-muted-foreground hover:text-foreground transition-colors"
             aria-label="GitHub"
           >
@@ -40,15 +41,16 @@ export function SiteFooter() {
             </svg>
           </Link>
           <Link
-            href="mailto:contact@example.com"
+            href="/feed.xml"
             className="text-muted-foreground hover:text-foreground transition-colors"
-            aria-label="Contact"
+            aria-label="Subscribe via RSS"
           >
-            <Mail className="w-5 h-5" />
+            <Rss className="w-5 h-5" />
           </Link>
           <Link
             href="https://jamieeverett.io"
             target="_blank"
+            rel="noopener noreferrer"
             className="text-muted-foreground hover:text-foreground text-sm flex items-center gap-1 transition-colors"
           >
             JamieEverett.io

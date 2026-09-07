@@ -1,8 +1,12 @@
-import Image from "next/image"
+import { feedAlternates } from "@/lib/site"
+import { SiteHeader } from "@/components/site-header"
+import { UpdateMeta } from "@/components/update-meta"
 import Link from "next/link"
 import { ArrowRight, BookOpen } from "lucide-react"
 import { SiteFooter } from "@/components/site-footer"
 import { getAllUpdates } from "@/lib/updates"
+
+export const metadata = { alternates: { ...feedAlternates, canonical: "/" } }
 
 export default function HomePage() {
   const updates = getAllUpdates()
@@ -11,30 +15,9 @@ export default function HomePage() {
   return (
     <div className="ember-shell min-h-screen bg-background flex flex-col">
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border">
-        <nav className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-3 group">
-            <Image
-              src="/images/logo.png"
-              alt="Project Ember"
-              width={32}
-              height={32}
-              className="transition-transform group-hover:scale-105"
-            />
-            <span className="text-foreground font-medium">Project Ember</span>
-          </Link>
-          <div className="flex items-center gap-6">
-            <Link href="#about" className="text-muted-foreground hover:text-foreground text-sm transition-colors">
-              About
-            </Link>
-            <Link href="#updates" className="text-muted-foreground hover:text-foreground text-sm transition-colors">
-              Updates
-            </Link>
-          </div>
-        </nav>
-      </header>
+      <SiteHeader home />
 
-      <main className="flex-1">
+      <main id="main-content" tabIndex={-1} className="flex-1">
         {/* Hero Section */}
         <section className="relative pt-32 pb-16 px-6 lg:pt-36 lg:pb-20">
           <div className="max-w-5xl mx-auto grid gap-12 lg:grid-cols-[minmax(0,1fr)_340px] lg:items-center">
@@ -71,11 +54,7 @@ export default function HomePage() {
 
                 <div className="space-y-4">
                   <div>
-                    <div className="mb-2 flex items-center gap-3 text-sm text-muted-foreground">
-                      <span className="font-mono text-ember">Week {latestUpdate.week}</span>
-                      <span className="text-border">·</span>
-                      <time>{latestUpdate.displayDate}</time>
-                    </div>
+                    <UpdateMeta update={latestUpdate} className="mb-2" />
                     <p className="text-muted-foreground text-sm leading-relaxed">
                       {latestUpdate.summary}
                     </p>
@@ -148,7 +127,7 @@ export default function HomePage() {
             <div className="space-y-1">
               {updates.map((update) => (
                 <Link 
-                  key={update.week}
+                  key={update.slug}
                   href={update.href}
                   className="group flex items-baseline justify-between py-4 border-b border-border hover:border-ember/50 transition-colors"
                 >
@@ -158,7 +137,7 @@ export default function HomePage() {
                       {update.title}
                     </h3>
                   </div>
-                  <time className="text-muted-foreground text-sm hidden sm:block">{update.displayDate}</time>
+                  <time dateTime={update.date} className="text-muted-foreground text-sm hidden sm:block">{update.displayDate}</time>
                 </Link>
               ))}
             </div>
