@@ -1,11 +1,13 @@
 ---
 title: "Meet the Team"
 week: 2
-date: "2026-09-07"
+date: "2026-06-12"
 summary: "Meet the IT operations and personal agents behind Project Ember, the responsibilities I've given them, and the inspiration that started it."
 ---
 
-The team introduction took longer than the week I promised in my first post. I'm picking the journal back up with the people, or rather agents, behind Project Ember.
+*Updated 8 September 2026 to reflect the team's evolving roles.*
+
+Here are the agents behind Project Ember and the responsibilities I've given them inside LibraHQ.
 
 I've split the team into two groups. IT Operations looks after the systems that keep everything running. The personal team focuses on the admin that competes for my attention each day.
 

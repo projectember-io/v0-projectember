@@ -23,11 +23,12 @@ export default function HomePage() {
           <div className="max-w-5xl mx-auto grid gap-12 lg:grid-cols-[minmax(0,1fr)_340px] lg:items-center">
             <div>
               <h1 className="font-sans text-4xl md:text-5xl text-foreground leading-tight mb-6 text-balance font-semibold">
-                My journey to build an autonomous AI organisation
+                A homelab that does more of its own maintenance.
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground max-w-2xl leading-relaxed mb-10">
-                Project Ember is a public experiment in building a team of specialised agents that think,
-                coordinate, and work together to reduce the time I spend on life admin.
+                I&apos;m Jamie. I use automation and AI agents to maintain my homelab, troubleshoot problems,
+                and reduce repetitive admin. Project Ember is where I share the workflows,
+                the failures, and what still needs a human.
               </p>
               <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
                 <Link
@@ -80,38 +81,37 @@ export default function HomePage() {
             <div className="grid md:grid-cols-2 gap-12">
               <div>
                 <h2 className="font-sans text-2xl md:text-3xl text-foreground mb-6 leading-tight font-semibold">
-                  A practical experiment in getting time back
+                  Practical automation, built in my own homelab
                 </h2>
                 <p className="text-muted-foreground leading-relaxed mb-4">
-                  Project Ember started with a simple frustration: too much time disappearing into calendars,
-                  reminders, project organisation, finances, grocery specials, homelab maintenance, and context
-                  switching.
+                  Servers, storage, networking, and self-hosted services all need attention. I&apos;m building
+                  ways to handle the repetitive work and make the difficult problems easier to investigate.
                 </p>
                 <p className="text-muted-foreground leading-relaxed">
-                  This isn&apos;t about replacing people or chasing AGI. It&apos;s a build-in-public journal about
-                  designing a virtual team that can handle real, repetitive work and reduce mental overhead.
+                  LibraHQ is the working environment where I build and test these systems. Project Ember is
+                  the public journal: what changed, how I checked it, and what I learned along the way.
                 </p>
               </div>
               <div className="space-y-6">
                 <div className="bg-card/80 border border-border rounded-lg p-6 backdrop-blur transition-colors hover:border-ember/50">
-                  <h3 className="text-foreground font-medium mb-2">Life Admin</h3>
+                  <h3 className="text-foreground font-medium mb-2">Homelab Maintenance</h3>
                   <p className="text-muted-foreground text-sm leading-relaxed">
-                    The first target is the quiet overhead of everyday systems: remembering, organising,
-                    tracking, maintaining, and following through.
+                    Monitoring, backups, services, and recurring maintenance. Each experiment starts with
+                    a real job and a way to check whether the result is useful.
                   </p>
                 </div>
                 <div className="bg-card/80 border border-border rounded-lg p-6 backdrop-blur transition-colors hover:border-ember/50">
-                  <h3 className="text-foreground font-medium mb-2">Specialised Agents</h3>
+                  <h3 className="text-foreground font-medium mb-2">AI in Practice</h3>
                   <p className="text-muted-foreground text-sm leading-relaxed">
-                    Rather than one assistant trying to do everything, each agent gets its own role,
-                    context, responsibilities, and expertise.
+                    Specialist agents help investigate and coordinate work. I document what they can do,
+                    where their access stops, and when a change needs my approval.
                   </p>
                 </div>
                 <div className="bg-card/80 border border-border rounded-lg p-6 backdrop-blur transition-colors hover:border-ember/50">
-                  <h3 className="text-foreground font-medium mb-2">Engineering Journal</h3>
+                  <h3 className="text-foreground font-medium mb-2">Workflows You Can Learn From</h3>
                   <p className="text-muted-foreground text-sm leading-relaxed">
-                    I&apos;ll document the experiments, architecture decisions, workflows, failures, and
-                    moments where AI actually saves meaningful time.
+                    Follow the problem, implementation, and verification, including failed attempts and
+                    unfinished work. The goal is to give you ideas you can use in your own setup.
                   </p>
                 </div>
               </div>

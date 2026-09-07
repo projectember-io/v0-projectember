@@ -1,6 +1,6 @@
 export const site = {
   name: "Project Ember",
-  description: "A public journal about building specialised AI agents to reduce life admin.",
+  description: "Jamie Everett’s practical homelab automation journal: AI agents, self-hosted services, maintenance, and the evidence behind what works.",
   author: "Jamie Everett",
 }
 

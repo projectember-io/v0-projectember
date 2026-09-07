@@ -7,7 +7,7 @@ import './globals.css'
 export const metadata: Metadata = {
   metadataBase: getSiteUrl(),
   title: { default: site.name, template: `%s | ${site.name}` },
-  description: 'Building an autonomous AI organisation from the ground up. A public project documenting the creation of specialised AI agents working together.',
+  description: site.description,
   alternates: feedAlternates,
   twitter: { card: "summary_large_image", images: ["/opengraph-image"] },
   icons: {
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Project Ember',
-    description: 'Building an autonomous AI organisation from the ground up.',
+    description: site.description,
     type: 'website',
   },
 }
