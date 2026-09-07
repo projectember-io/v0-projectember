@@ -341,6 +341,11 @@ html { scroll-padding-top: 7rem; }
 .article-content blockquote { border-left: 2px solid var(--ember); padding-left: 1.25rem; }
 .article-content pre { overflow-x: auto; background: var(--card); padding: 1rem; border-radius: 0.5rem; }
 .article-content code { font-family: monospace; color: var(--foreground); }
-.article-content table { display: block; overflow-x: auto; border-collapse: collapse; }
-.article-content :where(th, td) { border: 1px solid var(--border); padding: 0.5rem 0.75rem; }
-.article-content img { max-width: 100%; height: auto; }
+.article-table { max-width: 100%; overflow-x: auto; margin-block: 1.5rem; }
+.article-table:focus-visible { outline: 2px solid var(--foreground); outline-offset: 4px; }
+.article-content table { width: 100%; min-width: 36rem; border-collapse: collapse; margin: 0; overflow-wrap: normal; }
+.article-content :where(th, td) { border: 1px solid var(--border); padding: 0.75rem; text-align: left; vertical-align: top; }
+.article-content :where(th, td):first-child { min-width: 7.5rem; }
+.article-content img { display: block; max-width: 100%; height: auto; margin-inline: auto; }
+.article-content img[src="/images/it-operations-team.svg"] { width: 22rem; }
+.article-content img[src="/images/podcast-link-workflow.svg"] { width: 26rem; }

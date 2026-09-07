@@ -15,11 +15,24 @@ Open http://127.0.0.1:3000. Development and local production servers bind to loo
 
 ```sh
 pnpm check                  # lint, type checking, content/rendering tests, build
-pnpm exec playwright install chromium
-pnpm test:e2e               # desktop/mobile checks against the production build
+pnpm exec playwright install chromium webkit
+pnpm test:e2e               # desktop/tablet/mobile checks and article screenshots
 ```
 
-On a fresh Linux CI host, use `pnpm exec playwright install --with-deps chromium` to install browser system dependencies. GitHub Actions runs these checks on pull requests and pushes to main. Configure branch protection to require the `check` job before merging; workflow files alone do not enable branch protection.
+On a fresh Linux CI host, use `pnpm exec playwright install --with-deps chromium webkit` to install browser system dependencies. GitHub Actions runs these checks on pull requests and pushes to main. Configure branch protection to require the `check` job before merging where the GitHub plan permits it; workflow files alone do not enable branch protection.
+
+## Visual review before merging
+
+Week 2 and Week 3 have screenshot baselines for Chromium and WebKit at desktop, tablet and phone widths. Layout assertions catch oversized diagrams, fragmented table words, narrow agent columns and broken table scrolling. WebKit covers Safari's rendering engine, but does not replace testing on a physical Apple device.
+
+For each article or layout change:
+
+1. Run `pnpm check` and `pnpm test:e2e` on a branch. Add new articles to `tests/browser/articles.spec.ts` when publishing them.
+2. Open the `playwright-report` artifact from the PR's CI run. Inspect the full-page attachments at all three widths in both browsers. Read the diagram labels and table columns, and check surrounding spacing and code blocks.
+3. For intentional visual changes, inspect the actual screenshots before replacing the matching files in `tests/browser/articles.spec.ts-snapshots/`. Use screenshots from CI's pinned Ubuntu 24.04 environment and locked Playwright version. Local OS/font differences can affect pixels. Never update baselines just to clear a failing check.
+4. Commit the reviewed baselines and wait for an ordinary CI run to pass. Record the reviewed viewports in the PR before merging. CI never runs with `--update-snapshots`.
+
+The report includes expected, actual and diff images on a mismatch and is retained for 14 days, including successful runs. A missing baseline fails CI and supplies an actual image for initial review. Screenshot comparisons detect changes; reviewing the first baseline is what establishes whether the layout is acceptable.
 
 ## Publishing an update
 
@@ -61,7 +74,9 @@ Vercel preview deployments receive a disallow-all robots policy. Vercel Analytic
 
 ## Deployment and rollback
 
-The production domain returned HTTP 200 from Vercel during the September 7, 2026 review. The original scaffold linked this repository to a v0/Vercel project, but this checkout has no hosting credentials or linked Vercel configuration. The active Git deployment connection and branch protection still need verification in the hosting and repository settings.
+Vercel deploys pushes to `main` for `jamieeverett-io/v0-project-ember`. This checkout has no Vercel credentials. The production release gate is a hosting setting, not a property of this workflow: in the project's Settings → Deployment Checks, add the GitHub `check` job. Keep automatic production aliasing enabled. [Vercel Deployment Checks](https://vercel.com/docs/deployment-checks) hold the production domain on its previous deployment until the selected check passes. Do not rename the job without updating that setting.
+
+Until that setting is confirmed, Vercel can publish alongside CI. Always wait for the PR's checks and visual review before merging; do not assume a green build means the deployment gate is configured.
 
 In the hosting project's Git settings, verify the repository is `jamieeverett-io/v0-project-ember`, the production branch is `main`, and the custom domain is `www.projectember.io`. Use Node 24, install with `pnpm install --frozen-lockfile`, and build with `pnpm build`. Inspect a preview before merging. Confirm the production deployment's commit SHA matches the merged commit, then check the homepage, latest article, feed, sitemap, and sharing image.
 
