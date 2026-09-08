@@ -1,6 +1,14 @@
 import { expect, test } from "@playwright/test"
+import { getAllUpdates } from "../../lib/updates"
 
 const articles = ["week-2-meet-the-team", "week-3-making-reruns-safe"]
+
+test("new published articles are included in visual review", () => {
+  // The original text-only launch post predates these baselines. Every other
+  // published post must be added here before its release checks can pass.
+  const published = getAllUpdates().map(({ slug }) => slug).filter((slug) => slug !== "week-1-launch")
+  expect([...articles].sort()).toEqual(published.sort())
+})
 
 for (const slug of articles) {
   test(`${slug} stays readable and matches the reviewed layout`, async ({ page }, testInfo) => {

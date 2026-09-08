@@ -27,7 +27,7 @@ Week 2 and Week 3 have screenshot baselines for Chromium and WebKit at desktop, 
 
 For each article or layout change:
 
-1. Run `pnpm check` and `pnpm test:e2e` on a branch. Add new articles to `tests/browser/articles.spec.ts` when publishing them.
+1. Run `pnpm check` and `pnpm test:e2e` on a branch. Add new articles to `tests/browser/articles.spec.ts` when publishing them, adapting the image assertions to their diagrams. A coverage check fails if a published post is omitted. Only the original text-only Week 1 launch post is exempt.
 2. Open the `playwright-report` artifact from the PR's CI run. Inspect the full-page attachments at all three widths in both browsers. Read the diagram labels and table columns, and check surrounding spacing and code blocks.
 3. For intentional visual changes, inspect the actual screenshots before replacing the matching files in `tests/browser/articles.spec.ts-snapshots/`. Use screenshots from CI's pinned Ubuntu 24.04 environment and locked Playwright version. Local OS/font differences can affect pixels. Never update baselines just to clear a failing check.
 4. Commit the reviewed baselines and wait for an ordinary CI run to pass. Record the reviewed viewports in the PR before merging. CI never runs with `--update-snapshots`.
