@@ -57,7 +57,18 @@ for (const slug of articles) {
         await wrapper.focus()
         await page.keyboard.press("ArrowRight")
         await expect.poll(() => wrapper.evaluate((element) => element.scrollLeft)).toBeGreaterThan(0)
+        // Keyboard scrolling animates in Chromium. Wait for it to settle so
+        // a late animation frame cannot shift the table after we reset it.
+        let previous = -1
+        let stable = 0
+        await expect.poll(async () => {
+          const current = await wrapper.evaluate((element) => element.scrollLeft)
+          stable = current === previous ? stable + 1 : 0
+          previous = current
+          return stable
+        }, { intervals: [100] }).toBeGreaterThanOrEqual(2)
         await wrapper.evaluate((element) => { element.scrollLeft = 0; (element as HTMLElement).blur() })
+        await expect.poll(() => wrapper.evaluate((element) => element.scrollLeft)).toBe(0)
       }
     }
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(page.viewportSize()!.width)
