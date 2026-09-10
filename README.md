@@ -2,6 +2,9 @@
 
 The public engineering journal at https://www.projectember.io, built with Next.js App Router, React, Tailwind CSS, and Markdown. This repository contains the website and articles. Agent runtimes live elsewhere.
 
+The website source and history are public at `projectember-io/v0-projectember`.
+Article drafts are hidden from the rendered site, but remain readable in this public repository.
+
 ## Local development
 
 Use Node **24.18.0** (see `.node-version`) and pnpm **10.34.5** (pinned in `package.json`). With Corepack installed, run `corepack enable` to make pnpm available.
