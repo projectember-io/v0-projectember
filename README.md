@@ -70,6 +70,16 @@ The default canonical origin is `https://www.projectember.io`. An optional `SITE
 - `/opengraph-image` generates the shared social card locally without external image or font requests.
 - Article metadata supplies its title, summary, canonical URL, and publication date.
 
+## FrameFound update feed
+
+`public/framefound/appcast.xml` is served at the stable HTTPS address
+`https://www.projectember.io/framefound/appcast.xml` for FrameFound's Sparkle updater.
+It starts with no release entries. Publishing this feed does not publish an app release.
+Keep the address stable and add only approved, signed release archives using Sparkle's
+`generate_appcast` tool. FrameFound's signing key stays in the release Mac's Keychain
+under account `framefound`; private keys and signing assets must never enter this repository.
+The app repository owns update consent, its embedded public key and release verification.
+
 Vercel preview deployments receive a disallow-all robots policy. Vercel Analytics is loaded in production builds. No application secrets are required.
 
 ## Deployment and rollback
