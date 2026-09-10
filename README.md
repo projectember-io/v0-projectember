@@ -2,6 +2,9 @@
 
 The public engineering journal at https://www.projectember.io, built with Next.js App Router, React, Tailwind CSS, and Markdown. This repository contains the website and articles. Agent runtimes live elsewhere.
 
+The website source and history are public at `projectember-io/v0-projectember`.
+Article drafts are hidden from the rendered site, but remain readable in this public repository.
+
 ## Local development
 
 Use Node **24.18.0** (see `.node-version`) and pnpm **10.34.5** (pinned in `package.json`). With Corepack installed, run `corepack enable` to make pnpm available.
@@ -70,15 +73,25 @@ The default canonical origin is `https://www.projectember.io`. An optional `SITE
 - `/opengraph-image` generates the shared social card locally without external image or font requests.
 - Article metadata supplies its title, summary, canonical URL, and publication date.
 
+## FrameFound update feed
+
+`public/framefound/appcast.xml` is served at the stable HTTPS address
+`https://www.projectember.io/framefound/appcast.xml` for FrameFound's Sparkle updater.
+It starts with no release entries. Publishing this feed does not publish an app release.
+Keep the address stable and add only approved, signed release archives using Sparkle's
+`generate_appcast` tool. FrameFound's signing key stays in the release Mac's Keychain
+under account `framefound`; private keys and signing assets must never enter this repository.
+The app repository owns update consent, its embedded public key and release verification.
+
 Vercel preview deployments receive a disallow-all robots policy. Vercel Analytics is loaded in production builds. No application secrets are required.
 
 ## Deployment and rollback
 
-Vercel deploys pushes to `main` for `jamieeverett-io/v0-project-ember`. This checkout has no Vercel credentials. The production release gate is a hosting setting, not a property of this workflow: in the project's Settings → Deployment Checks, add the GitHub `check` job. Keep automatic production aliasing enabled. [Vercel Deployment Checks](https://vercel.com/docs/deployment-checks) hold the production domain on its previous deployment until the selected check passes. Do not rename the job without updating that setting.
+Vercel deploys pushes to `main` for `projectember-io/v0-projectember`. This checkout has no Vercel credentials. The production release gate is a hosting setting, not a property of this workflow: in the project's Settings → Deployment Checks, add the GitHub `check` job. Keep automatic production aliasing enabled. [Vercel Deployment Checks](https://vercel.com/docs/deployment-checks) hold the production domain on its previous deployment until the selected check passes. Do not rename the job without updating that setting.
 
 Jamie confirmed enabling the `check` deployment gate on September 8, 2026. Always wait for the PR's checks and visual review before merging. If the hosting configuration changes, verify the gate again; a green build alone does not establish that it is enabled.
 
-In the hosting project's Git settings, verify the repository is `jamieeverett-io/v0-project-ember`, the production branch is `main`, and the custom domain is `www.projectember.io`. Use Node 24, install with `pnpm install --frozen-lockfile`, and build with `pnpm build`. Inspect a preview before merging. Confirm the production deployment's commit SHA matches the merged commit, then check the homepage, latest article, feed, sitemap, and sharing image.
+In the hosting project's Git settings, verify the repository is `projectember-io/v0-projectember`, the production branch is `main`, and the custom domain is `www.projectember.io`. Use Node 24, install with `pnpm install --frozen-lockfile`, and build with `pnpm build`. Inspect a preview before merging. Confirm the production deployment's commit SHA matches the merged commit, then check the homepage, latest article, feed, sitemap, and sharing image.
 
 For a self-hosted Node deployment, run the build and `pnpm start` behind the existing reverse proxy. The server binds to `127.0.0.1:3000`; publishing network access is a separate hosting operation.
 

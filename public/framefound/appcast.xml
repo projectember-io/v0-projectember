@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle">
+  <channel>
+    <title>FrameFound updates</title>
+    <link>https://www.projectember.io/framefound/appcast.xml</link>
+    <description>Official FrameFound software updates.</description>
+    <language>en</language>
+    <!-- No release is available yet. Add only signed, approved update archives. -->
+  </channel>
+</rss>

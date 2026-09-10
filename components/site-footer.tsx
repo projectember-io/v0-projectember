@@ -30,7 +30,7 @@ export function SiteFooter() {
         </div>
         <div className="flex items-center gap-6">
           <Link
-            href="https://github.com/jamieeverett-io/v0-project-ember"
+            href="https://github.com/projectember-io/v0-projectember"
             target="_blank"
             rel="noopener noreferrer"
             className="text-muted-foreground hover:text-foreground transition-colors"
