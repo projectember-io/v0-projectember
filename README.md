@@ -84,11 +84,11 @@ Vercel preview deployments receive a disallow-all robots policy. Vercel Analytic
 
 ## Deployment and rollback
 
-Vercel deploys pushes to `main` for `jamieeverett-io/v0-project-ember`. This checkout has no Vercel credentials. The production release gate is a hosting setting, not a property of this workflow: in the project's Settings → Deployment Checks, add the GitHub `check` job. Keep automatic production aliasing enabled. [Vercel Deployment Checks](https://vercel.com/docs/deployment-checks) hold the production domain on its previous deployment until the selected check passes. Do not rename the job without updating that setting.
+Vercel deploys pushes to `main` for `projectember-io/v0-projectember`. This checkout has no Vercel credentials. The production release gate is a hosting setting, not a property of this workflow: in the project's Settings → Deployment Checks, add the GitHub `check` job. Keep automatic production aliasing enabled. [Vercel Deployment Checks](https://vercel.com/docs/deployment-checks) hold the production domain on its previous deployment until the selected check passes. Do not rename the job without updating that setting.
 
 Jamie confirmed enabling the `check` deployment gate on September 8, 2026. Always wait for the PR's checks and visual review before merging. If the hosting configuration changes, verify the gate again; a green build alone does not establish that it is enabled.
 
-In the hosting project's Git settings, verify the repository is `jamieeverett-io/v0-project-ember`, the production branch is `main`, and the custom domain is `www.projectember.io`. Use Node 24, install with `pnpm install --frozen-lockfile`, and build with `pnpm build`. Inspect a preview before merging. Confirm the production deployment's commit SHA matches the merged commit, then check the homepage, latest article, feed, sitemap, and sharing image.
+In the hosting project's Git settings, verify the repository is `projectember-io/v0-projectember`, the production branch is `main`, and the custom domain is `www.projectember.io`. Use Node 24, install with `pnpm install --frozen-lockfile`, and build with `pnpm build`. Inspect a preview before merging. Confirm the production deployment's commit SHA matches the merged commit, then check the homepage, latest article, feed, sitemap, and sharing image.
 
 For a self-hosted Node deployment, run the build and `pnpm start` behind the existing reverse proxy. The server binds to `127.0.0.1:3000`; publishing network access is a separate hosting operation.
 
